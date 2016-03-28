@@ -60,13 +60,13 @@ public class FortuneQueue<Event> {
             Punto p1=null;
             Punto p2=null;
             if (e1 instanceof CircleEvent){
-                p1 = ((CircleEvent) e1).puntoCircleEvent();
+                p1 = ((CircleEvent) e1).puntoCircleEvent(); //se agradeceria un getter del punto, para no calcularlo de nuevo
             }
             else if (e1 instanceof SiteEvent){
                 //pues cogeremos el punto de turno, pero aun no se puede hacer
             }
             if (e2 instanceof CircleEvent){
-                p2 = ((CircleEvent) e2).puntoCircleEvent();
+                p2 = ((CircleEvent) e2).puntoCircleEvent(); //se agradeceria un getter del punto, para no calcularlo de nuevo
             }
             else if (e2 instanceof SiteEvent){
                 //pues cogeremos el punto de turno, pero aun no se puede hacer
