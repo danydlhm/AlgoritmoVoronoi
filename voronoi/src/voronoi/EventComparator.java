@@ -24,13 +24,13 @@ public class EventComparator implements Comparator<Event> {
             p1 = ((CircleEvent) e1).puntoCircleEvent(); //se agradeceria un getter del punto, para no calcularlo de nuevo
         }
         else if (e1 instanceof SiteEvent){
-            //pues cogeremos el punto de turno, pero aun no se puede hacer
+            p1 = ((SiteEvent) e1).getP();
         }
         if (e2 instanceof CircleEvent){
             p2 = ((CircleEvent) e2).puntoCircleEvent(); //se agradeceria un getter del punto, para no calcularlo de nuevo
         }
         else if (e2 instanceof SiteEvent){
-            //pues cogeremos el punto de turno, pero aun no se puede hacer
+            p2 = ((SiteEvent) e2).getP();
         }           
         return Double.compare(p1.getX(), p2.getX());
         //Suponemos comparacion de puntos de izquierda a derecha
