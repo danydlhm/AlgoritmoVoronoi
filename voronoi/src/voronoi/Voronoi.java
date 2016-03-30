@@ -5,6 +5,8 @@
  */
 package voronoi;
 
+import JAMA.Matrix;
+
 /**
  *
  * @author Dany
@@ -16,6 +18,7 @@ public class Voronoi {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
     }
     
 }

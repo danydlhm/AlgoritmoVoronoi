@@ -47,6 +47,18 @@ public class circleEvent {
         return puntoDere;
     }
 
+    public double[] getEcuacion() {
+        return ecuacion;
+    }
+
+    public Vertice getCentro() {
+        return centro;
+    }
+
+    public Punto getPuntoCircleEvent() {
+        return puntoCircleEvent;
+    }
+
     public void setPuntoIzq(Punto puntoIzq) {
         this.puntoIzq = puntoIzq;
     }
