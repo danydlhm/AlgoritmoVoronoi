@@ -12,47 +12,30 @@ package voronoi;
 class Arista {
     
     
-    Vertice vOrigen;
-    Vertice vFinal;
-    Cara caraIncidente;
-    private Arista twin;
+    Punto pNacimiento;
+    Punto pFin;
     
-    public Arista(Vertice v1, Vertice v2){
-        vOrigen = v1;
-        vFinal = v2;
-        twin = new Arista(vFinal,vOrigen);
-        twin.setTwin(this);
+    public Arista(Punto pNacimiento, Punto pFin){
+        this.pNacimiento = pNacimiento;
+        this.pFin = pFin;
     }
     
-    public Vertice getOrigen(){
-        return vOrigen;
-    }
-    
-    
-    public void setCaraIncidente(Cara c){
-        this.caraIncidente = c;
-    }
-    
-    public Cara getCaraIncidente(){
-        return this.caraIncidente;
-    }
-    
-    public Arista next(){
-        return this.caraIncidente.boundary();
+    public Punto getpNacimiento() {
+        return pNacimiento;
     }
 
-    /**
-     * @return the twin
-     */
-    public Arista getTwin() {
-        return twin;
+    public Punto getpFin() {
+        return pFin;
     }
 
-    /**
-     * @param twin the twin to set
-     */
-    public void setTwin(Arista twin) {
-        this.twin = twin;
+    public void setpNacimiento(Punto pNacimiento) {
+        this.pNacimiento = pNacimiento;
     }
+
+    public void setpFin(Punto pFin) {
+        this.pFin = pFin;
+    }
+    
+
     
 }
