@@ -5,14 +5,15 @@ package voronoi;
 * @author Sergio y Francisco
 */
 
-public class SiteEvent {
+public class SiteEvent extends Event{
 	private Punto p;
 	
 	public SiteEvent(Punto p){
 		this.p = p;
 	}
 	
-	public Punto getP() {
+        @Override
+	public Punto getEvent() {
 		return p;
 	}
 	
