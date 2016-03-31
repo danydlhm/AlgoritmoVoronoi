@@ -19,17 +19,17 @@ public class DCEL {
     
     ArrayList<Vertice> listaVertices;
     ArrayList<Arista> listaAristas; 
-    ArrayList<Cara> listaCaras;
+//    ArrayList<Cara> listaCaras;
     
     public DCEL(){
         
     }
     
-    public DCEL(ArrayList<Vertice> lv,ArrayList<Arista> la,ArrayList<Cara> lc){
+    public DCEL(ArrayList<Vertice> lv,ArrayList<Arista> la){
         
         listaVertices = lv;
         listaAristas = la;
-        listaCaras = lc;
+//        listaCaras = lc;
         
     }
     
@@ -41,10 +41,12 @@ public class DCEL {
         listaAristas.add(a);
     }
     
-    public void addCara(Cara c){
-        listaCaras.add(c);
+//    public void addCara(Cara c){
+//        listaCaras.add(c);
+//    }
+    
+    public boolean puntoEsVertice(Punto p){
+        return listaVertices.contains(p);
     }
-    
-    
     
 }

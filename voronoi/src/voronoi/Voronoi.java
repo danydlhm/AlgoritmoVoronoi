@@ -6,6 +6,10 @@
 package voronoi;
 
 import JAMA.Matrix;
+import java.util.ArrayList;
+import voronoi.Punto;
+import voronoi.Vertice;
+import voronoi.DCEL;
 
 /**
  *
@@ -18,7 +22,7 @@ public class Voronoi {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
     }
     
 }
