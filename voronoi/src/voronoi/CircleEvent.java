@@ -15,7 +15,7 @@ import java.lang.Math;
  *
  * @author Patori
  */
-public class CircleEvent {
+public class CircleEvent extends Event{
  
     private Punto puntoIzq;
     private Punto puntoCentro;
@@ -55,7 +55,8 @@ public class CircleEvent {
         return centro;
     }
 
-    public Punto getPuntoCircleEvent() {
+    @Override
+    public Punto getEvent() {
         return puntoCircleEvent;
     }
 
