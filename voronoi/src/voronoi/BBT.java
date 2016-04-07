@@ -33,31 +33,29 @@ public class BBT {
             this.data[0]=p;
             this.height=0;
         }else {
-            if(this.left!=null && this.right!=null) {
-                if(this.data[0].getX()<p.getX()){
-                    this.right = new BBT();
-                    this.right.insert(p);
-                    this.left = new BBT(this.left,this.right,this.height,this.data);
-                    this.data[1]=p;
-                    this.height++;
-                }else {
-                    this.right = new BBT(this.left,this.right,this.height,this.data);
-                    this.left = new BBT();
-                    this.left.insert(p);
-                    Punto l = this.data[0];
-                    this.data[0] = p;
-                    this.data[1] = l;
+            if(this.left!=null && this.right!=null) { //caso base es el else
+                int i = this.deterFrenteParabolas(this.data[0], this.data[1], p);
+                if (i == 0){
+                    this.getLeft().insert(p);
+                    //mas a la izq o derech
+                }else{
+                    this.getRight().insert(p);
                 }
+                
             }else {     //Left null and right not null (or viceversa) will never happen
-                double half = (this.data[1].getX()-this.data[0].getX())/2;
-                half = half+this.data[0].getX();
-                if(p.getX()<=half){
-                    this.left.insert(p);
-                    this.data[0]=this.left.data[1];
-                }else {
-                    this.right.insert(p);
-                    this.data[1]=this.right.data[0];
-                }
+                BBT nuevo = new BBT();
+                nuevo.data[0] = p;
+                nuevo.data[1] = this.data[0];
+                nuevo.left = new BBT();
+                nuevo.right = new BBT();
+                nuevo.right.insert(this.data[0]);
+                nuevo.left.data[0] = this.data[0];
+                nuevo.left.data[1] = p;
+                nuevo.left.right = new BBT();
+                nuevo.left.right.insert(p);
+                nuevo.left.left = new BBT();
+                nuevo.left.left.insert(this.data[0]);
+                this.setArbol(nuevo);
             }
             this.rebalance();
         }
@@ -99,6 +97,22 @@ public class BBT {
 
     public void setData(Punto[] data) {
         this.data = data;
+    }
+    
+    private int deterFrenteParabolas(Punto a, Punto b, Punto site) {    //a izquierdo, b derecho
+        double punto1 = (Math.pow(site.getX()-a.getX(),2) + Math.pow(a.getY(),2)- Math.pow(site.getY(),2) )/2*(a.getY()-site.getY());
+        double punto2 = (Math.pow(site.getX()-b.getX(),2) + Math.pow(b.getY(),2)- Math.pow(site.getY(),2) )/2*(b .getY()-site.getY());
+        if (punto1 < punto2){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
+    private void setArbol(BBT nuevo) {
+        this.data = nuevo.data;
+        this.right = nuevo.right;
+        this.left = nuevo.left;
     }
     
     
