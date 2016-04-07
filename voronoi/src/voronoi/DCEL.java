@@ -49,4 +49,22 @@ public class DCEL {
         return listaVertices.contains(p);
     }
     
+    public void updateAristas(Punto v, Punto cara){
+        ArrayList<Integer> listPosiciones = new ArrayList();
+        
+        for (int i=0; i<this.listaAristas.size();i++){
+            if (((this.listaAristas.get(i)).getCara1().equals(cara))||((this.listaAristas.get(i)).getCara2().equals(cara))){
+                listPosiciones.add(i);
+            }
+        }
+        
+        for (Integer a:listPosiciones){
+            (this.listaAristas.get(a)).setpFin(v);
+        }
+        
+        Vertice vert=new Vertice(v.getX(),v.getY());
+        this.listaVertices.add(vert);
+        
+    }
+    
 }
