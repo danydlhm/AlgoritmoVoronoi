@@ -37,6 +37,11 @@ public class Punto {
     public void setY(double y) {
         this.y = y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (((Punto)obj).getX()==this.getX())&&(((Punto)obj).getY()==this.getY());
+    }
     
     
     

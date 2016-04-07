@@ -7,8 +7,8 @@ package voronoi;
 
 /**
  *
- * @author Dany
+ * @author Andrés
  */
-public interface Event {
-    
+public abstract class Event {
+    public abstract Punto getEvent();
 }

@@ -15,7 +15,7 @@ import java.lang.Math;
  *
  * @author Patori
  */
-public class circleEvent {
+public class CircleEvent extends Event{
  
     private Punto puntoIzq;
     private Punto puntoCentro;
@@ -25,7 +25,7 @@ public class circleEvent {
     private Punto puntoCircleEvent;
  
 //Constructores    
-    public circleEvent(Punto puntoIzq,Punto puntoCentro,Punto puntoDere){
+    public CircleEvent(Punto puntoIzq,Punto puntoCentro,Punto puntoDere){
         this.puntoIzq = puntoIzq;
         this.puntoDere = puntoDere;
         this.puntoCentro = puntoCentro;
@@ -45,6 +45,19 @@ public class circleEvent {
 
     public Punto getPuntoDere() {
         return puntoDere;
+    }
+
+    public double[] getEcuacion() {
+        return ecuacion;
+    }
+
+    public Vertice getCentro() {
+        return centro;
+    }
+
+    @Override
+    public Punto getEvent() {
+        return puntoCircleEvent;
     }
 
     public void setPuntoIzq(Punto puntoIzq) {
