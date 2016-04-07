@@ -14,11 +14,18 @@ public class SiteEvent extends Event{
 	
         @Override
 	public Punto getEvent() {
-		return p;
+		return getP();
 	}
 	
 	public void setP(Punto p) {
 		this.p = p;
 	}
+
+    /**
+     * @return the p
+     */
+    public Punto getP() {
+        return p;
+    }
 	
 }

@@ -17,6 +17,8 @@ class Arista {
     Punto cara1;
     Punto cara2;
     
+    
+    
     public Arista(Punto pNacimiento, Punto pFin){
         this.pNacimiento = pNacimiento;
         this.pFin = pFin;

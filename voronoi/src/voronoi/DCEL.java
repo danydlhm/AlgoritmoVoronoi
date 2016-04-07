@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author JosePertierra
  */
 /*
-Clase DCEL (Double connected edge list) encargada de almacenar el grafo resultante del algoritmo de Fortune, i.e. el
+Clase DCEL (Doubly-connected edge list) encargada de almacenar el grafo resultante del algoritmo de Fortune, i.e. el
 Voronoi.
 */
 public class DCEL {
