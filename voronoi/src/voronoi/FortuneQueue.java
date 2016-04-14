@@ -47,5 +47,20 @@ public class FortuneQueue{
     public boolean remove(Event e){
         return queue.remove(e);
     }
-
+    
+    public PriorityQueue getQueue(){
+        return queue;
+    }
+    
+    public void removeCircleEvent(){
+        PriorityQueue queueAux = new PriorityQueue<>(new EventComparator());
+        Event aux;
+        for (int i=0; i<queue.size();i++){
+            aux = queue.poll();
+            if (aux instanceof SiteEvent){
+                queueAux.add(aux);
+            }
+        }
+        queue=queueAux;
+    }
 }

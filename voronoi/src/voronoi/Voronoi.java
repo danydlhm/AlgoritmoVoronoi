@@ -12,6 +12,7 @@ import java.util.Set;
 import voronoi.Punto;
 import voronoi.Vertice;
 import voronoi.DCEL;
+import java.util.PriorityQueue;
 
 /**
  *
@@ -77,10 +78,10 @@ public class Voronoi {
     */
     public void procesarSiteEvent(SiteEvent ev){
         
-        arbol.insert(ev.getP());
-        Arista nuevArista = new Arista(ev.getP(),null);
+        Punto cara = arbol.insert(ev.getP());
+        Arista nuevArista = new Arista(ev.getP(),null, ev.getP(), cara);
         
-        
+        estructuraSalida.addArista(nuevArista);
     }
     
     /*
@@ -91,8 +92,9 @@ public class Voronoi {
         Punto vertice = ev.getCentro();
         Punto cara = ev.getPuntoCentro();
         arbol.remove(cara);
-        Arista nuevArista = new Arista(vertice,null);
-        estructuraSalida.updateArista(vertice,cara);
+        Arista nuevArista = new Arista(vertice,null,ev.getPuntoIzq(),ev.getPuntoDere());
+        estructuraSalida.updateAristas(vertice,cara);
+        estructuraSalida.addArista(nuevArista);
         
     }
     

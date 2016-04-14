@@ -23,6 +23,14 @@ class Arista {
         this.pNacimiento = pNacimiento;
         this.pFin = pFin;
     }
+
+    public Arista(Punto pNacimiento, Punto pFin, Punto cara1, Punto cara2) {
+        this.pNacimiento = pNacimiento;
+        this.pFin = pFin;
+        this.cara1 = cara1;
+        this.cara2 = cara2;
+    }
+    
     
     public Punto getpNacimiento() {
         return pNacimiento;
