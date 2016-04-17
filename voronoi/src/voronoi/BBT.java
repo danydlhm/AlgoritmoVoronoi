@@ -115,5 +115,9 @@ public class BBT {
         this.left = nuevo.left;
     }
     
-    
+    private void remove(Punto p ){
+    //Hay que ver si hay un circle event que ya no sucederá en la lista
+    }
+
+    //Prueba
 }
