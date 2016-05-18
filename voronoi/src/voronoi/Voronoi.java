@@ -30,8 +30,8 @@ public class Voronoi {
      */
     public Voronoi(Set<Punto> conjunto) {
         // TODO code application logic here
-        Set<Punto> puntos = conjunto;
-        inicializar();
+        this.puntos = conjunto;
+        this.inicializar();
         
         /*
         Procesamos el primer event, que será siempre un SiteEvent
@@ -47,9 +47,9 @@ public class Voronoi {
         while ( !colaEv.isEmpty()){
             eventoAux = colaEv.poll();
             if ( eventoAux instanceof SiteEvent ){
-                procesarSiteEvent((SiteEvent) eventoAux);
+                this.procesarSiteEvent((SiteEvent) eventoAux);
             }else if (eventoAux instanceof CircleEvent){
-                procesarCircleEvent((CircleEvent) eventoAux);
+                this.procesarCircleEvent((CircleEvent) eventoAux);
             }
         }
         

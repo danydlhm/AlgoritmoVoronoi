@@ -19,14 +19,14 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
             this.addRoot(pareja);
         } else {
             Position<Pareja> pos = this.root();
+            boolean izquierda;
             while (!this.isLeaf(pos)) {
                 Pareja actual = pos.getElement();
-                if (actual.getIzquierdo().getX() <= p.getX()) {
+                izquierda = this.deterFrenteParabolas(actual.getIzquierdo(), actual.getDerecho(), p);
+                if (izquierda) {
                     pos = this.left(pos);
-                } else if (actual.getDerecho().getX() >= p.getX()) {
-                    pos = this.right(pos);
                 } else {
-                    //FRENTE DE PARÁBOLAS
+                    pos = this.right(pos);
                 }
             }
             Punto a = pos.getElement().getIzquierdo();
@@ -48,5 +48,11 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
     
     private void rebalance() {
         throw new UnsupportedOperationException("TO DO: rebalance()");
+    }
+    
+    private boolean deterFrenteParabolas(Punto a, Punto b, Punto site) {    //a izquierdo, b derecho
+        double punto1 = (Math.pow(site.getX()-a.getX(),2) + Math.pow(a.getY(),2)- Math.pow(site.getY(),2) )/(2*(a.getY()-site.getY()));
+        double punto2 = (Math.pow(site.getX()-b.getX(),2) + Math.pow(b.getY(),2)- Math.pow(site.getY(),2) )/(2*(b .getY()-site.getY()));
+        return (punto1 < punto2);
     }
 }
