@@ -19,13 +19,8 @@ public class Pareja {
         this.izquierdo=unico;
     }
     public Pareja(Punto a, Punto b){
-        if(a.getX()<=b.getX()){
-            this.izquierdo = a;
-            this.derecho = b;
-        }else{
-            this.izquierdo = b;
-            this.derecho = a;
-        }
+        this.izquierdo = a;
+        this.derecho = b;
     }
     public Punto getIzquierdo(){
         return izquierdo;
