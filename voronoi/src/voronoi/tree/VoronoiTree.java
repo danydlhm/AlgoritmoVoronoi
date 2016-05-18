@@ -14,10 +14,10 @@ import voronoi.Punto;
 public class VoronoiTree extends LinkedBinaryTree<Pareja> {
 
     public Position<Pareja> insert(Punto p) {
-        Pareja pareja;
+        Position<Pareja> referencia;
         if (this.isEmpty()) {
-            pareja = new Pareja(p);
-            this.addRoot(pareja);
+            Pareja pareja = new Pareja(p);
+            referencia = this.addRoot(pareja);
         } else {
             Position<Pareja> pos = this.root();
             boolean izquierda;
@@ -33,18 +33,19 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
             Punto a = pos.getElement().getIzquierdo();
             Position<Pareja> padre = this.parent(pos);
             boolean esIzquierdo = this.left(padre)==pos;
-            pareja = new Pareja(p,a);
+            Pareja nueva = new Pareja(p,a);
             this.remove(pos);
             if(esIzquierdo){
-                pos = this.insertLeft(padre, pareja);
+                pos = this.insertLeft(padre, nueva);
             }else{
-                pos = this.insertRight(padre, pareja);
+                pos = this.insertRight(padre, nueva);
             }
-            this.insertLeft(pos, new Pareja(pareja.getDerecho(),pareja.getIzquierdo()));
-            this.insertRight(pos, new Pareja(pareja.getDerecho()));
+            this.insertLeft(pos, new Pareja(nueva.getDerecho(),nueva.getIzquierdo()));
+            this.insertRight(pos, new Pareja(nueva.getDerecho()));
+            referencia = pos;
         }
         this.rebalance();
-        return pareja;
+        return referencia;
     }
     
     

@@ -11,6 +11,8 @@ import java.lang.reflect.Array;
 import voronoi.Punto;
 import voronoi.Vertice;
 import java.lang.Math; 
+import voronoi.tree.Pareja;
+import voronoi.tree.Position;
 /**
  *
  * @author Patori
@@ -23,15 +25,17 @@ public class CircleEvent extends Event{
     private double[] ecuacion;
     private Vertice centro;
     private Punto puntoCircleEvent;
+    private Position<Pareja> position;
  
 //Constructores    
-    public CircleEvent(Punto puntoIzq,Punto puntoCentro,Punto puntoDere){
+    public CircleEvent(Punto puntoIzq,Punto puntoCentro,Punto puntoDere,Position<Pareja> pos){
         this.puntoIzq = puntoIzq;
         this.puntoDere = puntoDere;
         this.puntoCentro = puntoCentro;
         this.ecuacion = ecuacionCircunferencia();
         this.centro = calcularVertice();
         this.puntoCircleEvent = puntoCircleEvent();
+        this.position = pos;
     }
 
  //Getter y setter
@@ -108,4 +112,9 @@ public class CircleEvent extends Event{
             return new Punto(this.centro.getX(),y1);
         }
     }
+
+    public Position<Pareja> getPosition() {
+        return position;
+    }
+    
 }

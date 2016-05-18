@@ -13,6 +13,9 @@ import voronoi.Punto;
 import voronoi.Vertice;
 import voronoi.DCEL;
 import java.util.PriorityQueue;
+import voronoi.tree.Pareja;
+import voronoi.tree.Position;
+import voronoi.tree.VoronoiTree;
 
 /**
  *
@@ -20,7 +23,7 @@ import java.util.PriorityQueue;
  */
 public class Voronoi {
 
-    BBT arbol;
+    VoronoiTree arbol;
     DCEL estructuraSalida;
     FortuneQueue colaEv;
     Set<Punto> puntos;
@@ -78,7 +81,7 @@ public class Voronoi {
     */
     public void procesarSiteEvent(SiteEvent ev){
         
-        Punto cara = arbol.insert(ev.getP());
+        Punto cara = arbol.insert(ev.getP()).getElement().getDerecho();
         Arista nuevArista = new Arista(ev.getP(),null, ev.getP(), cara);
         
         estructuraSalida.addArista(nuevArista);
@@ -91,7 +94,8 @@ public class Voronoi {
         
         Punto vertice = ev.getCentro();
         Punto cara = ev.getPuntoCentro();
-        arbol.remove(cara);
+        Position<Pareja> pos = ev.getPosition();
+        arbol.remove(pos);
         Arista nuevArista = new Arista(vertice,null,ev.getPuntoIzq(),ev.getPuntoDere());
         estructuraSalida.updateAristas(vertice,cara);
         estructuraSalida.addArista(nuevArista);
