@@ -43,7 +43,7 @@ public class FrontIterator<E> implements Iterator<Position<E>> {
     }
     
     private void putInside (Position<E> p){
-        if (this.tree.isRoot(p) && this.tree.isLeaf(p)){
+        if (this.tree.isLeaf(p)){
             nodeQueue.add(p);
         }
         if (tree.children(p)!=null){
