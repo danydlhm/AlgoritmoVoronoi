@@ -19,12 +19,12 @@ public class EventComparator implements Comparator<Event> {
             throw new RuntimeException("Objects are null");
         }
         Punto p1=e1.getEvent();
-        Punto p2=e2.getEvent();         
+        Punto p2=e2.getEvent();
         int r = Double.compare(p1.getY(), p2.getY());
         if(r!=0){
-            return r;
+            return -r;
         }else{
-            return Double.compare(p1.getX(), p2.getX());
+            return -(Double.compare(p1.getX(), p2.getX()));
         }
     }
     

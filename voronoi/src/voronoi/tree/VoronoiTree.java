@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Queue;
 import voronoi.CircleEvent;
+import voronoi.Event;
 import voronoi.FortuneQueue;
 import voronoi.Punto;
 
@@ -27,7 +28,7 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
     }
     
     public VoronoiTree(){
-        //this(new FortuneQueue());
+        this(new FortuneQueue());
     }
     
     public Position<Pareja> insert(Punto p) {
@@ -291,7 +292,7 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
                     System.out.println("Son todos distintos:");
                     System.out.println(a0 + " - "+ a1 + " - "+a2);
                     CircleEvent nuevoEvento = new CircleEvent(a0,a1,a2,(Position<Pareja>) arrAux[1]);
-                    //this.colaEventos.add(nuevoEvento);
+                    this.colaEventos.add(nuevoEvento);
                 }
                 cola.pop();
                 cola.add(pAux);
@@ -310,10 +311,20 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
                     System.out.println("Son todos distintos:");
                     System.out.println(a0 + " - "+ a1 + " - "+a2);
                     CircleEvent nuevoEvento = new CircleEvent(a0,a1,a2,(Position<Pareja>) arrAux[1]);
-                    //this.colaEventos.add(nuevoEvento);
+                    this.colaEventos.add(nuevoEvento);
                 }
             }
         System.out.println("Hojas: \n"+text);
+    }
+    
+    public void addToColaEventos(Event e){
+        this.colaEventos.add(e);
+    }
+    public Event pollColaEventos(){
+        return this.colaEventos.poll();
+    }
+    public FortuneQueue getColaEventos() {
+        return colaEventos;
     }
     
 }

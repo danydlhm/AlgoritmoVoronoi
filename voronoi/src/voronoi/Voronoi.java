@@ -23,15 +23,15 @@ import voronoi.tree.VoronoiTree;
  */
 public class Voronoi {
 
-    VoronoiTree arbol;
-    DCEL estructuraSalida;
-    FortuneQueue colaEv;
+    VoronoiTree arbol = new VoronoiTree();
+    DCEL estructuraSalida = new DCEL();
     Set<Punto> puntos;
+
     
     /**
      * @param args the command line arguments
      */
-    public Voronoi(Set<Punto> conjunto) {
+    public DCEL Voronoi(Set<Punto> conjunto) {
         // TODO code application logic here
         this.puntos = conjunto;
         this.inicializar();
@@ -39,7 +39,7 @@ public class Voronoi {
         /*
         Procesamos el primer event, que será siempre un SiteEvent
         */
-        Event eventoAux = colaEv.poll();
+        Event eventoAux = arbol.pollColaEventos();
         if ( eventoAux != null ){
             arbol.insert(((SiteEvent) eventoAux).getP());
         }
@@ -47,14 +47,16 @@ public class Voronoi {
         /*
         Bucle de procesado de los events restantes.
         */
-        while ( !colaEv.isEmpty()){
-            eventoAux = colaEv.poll();
+        while ( !arbol.getColaEventos().isEmpty()){
+            eventoAux = arbol.pollColaEventos();
             if ( eventoAux instanceof SiteEvent ){
                 this.procesarSiteEvent((SiteEvent) eventoAux);
             }else if (eventoAux instanceof CircleEvent){
                 this.procesarCircleEvent((CircleEvent) eventoAux);
             }
         }
+        
+        return estructuraSalida;
         
     }
     
@@ -68,9 +70,9 @@ public class Voronoi {
         SiteEvent aux;
         
         for (Punto p : this.puntos){
-            
+            System.out.println(p);
             aux = new SiteEvent(p);
-            this.colaEv.add(aux);
+            this.arbol.addToColaEventos(aux);
             
         }
         
@@ -82,7 +84,7 @@ public class Voronoi {
     public void procesarSiteEvent(SiteEvent ev){
         
         Punto cara = arbol.insert(ev.getP()).getElement().getDerecho();
-        Arista nuevArista = new Arista(ev.getP(),null, ev.getP(), cara);
+        Arista nuevArista = new Arista(null,null, ev.getP(), cara);
         
         estructuraSalida.addArista(nuevArista);
     }

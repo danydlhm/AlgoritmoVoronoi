@@ -17,8 +17,8 @@ Voronoi.
 */
 public class DCEL {
     
-    ArrayList<Vertice> listaVertices;
-    ArrayList<Arista> listaAristas; 
+    ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
+    ArrayList<Arista> listaAristas = new ArrayList<Arista>(); 
 //    ArrayList<Cara> listaCaras;
     
     public DCEL(){
@@ -65,6 +65,14 @@ public class DCEL {
         Vertice vert=new Vertice(v.getX(),v.getY());
         this.listaVertices.add(vert);
         
+    }
+
+    public ArrayList<Vertice> getListaVertices() {
+        return listaVertices;
+    }
+
+    public ArrayList<Arista> getListaAristas() {
+        return listaAristas;
     }
     
 }

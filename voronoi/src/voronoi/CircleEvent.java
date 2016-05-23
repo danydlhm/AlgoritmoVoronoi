@@ -32,9 +32,9 @@ public class CircleEvent extends Event{
         this.puntoIzq = puntoIzq;
         this.puntoDere = puntoDere;
         this.puntoCentro = puntoCentro;
-        this.ecuacion = ecuacionCircunferencia();
-        this.centro = calcularVertice();
-        this.puntoCircleEvent = puntoCircleEvent();
+        this.ecuacion = this.ecuacionCircunferencia();
+        this.centro = this.calcularVertice();
+        this.puntoCircleEvent = this.puntoCircleEvent();
         this.position = pos;
     }
 
@@ -79,9 +79,9 @@ public class CircleEvent extends Event{
   //Funciones
     public double[] ecuacionCircunferencia(){
         double[] ecuacion = new double[5];
-        double b_1 = -((double) Math.pow(puntoIzq.getX(),2)) + ((double)Math.pow(puntoIzq.getY(),2));
-        double b_2 = -((double) Math.pow(puntoCentro.getX(),2)) + ((double)Math.pow(puntoCentro.getY(),2));
-        double b_3 = -((double) Math.pow(puntoDere.getX(),2)) + ((double)Math.pow(puntoDere.getY(),2));
+        double b_1 = -(((double) Math.pow(puntoIzq.getX(),2)) + ((double)Math.pow(puntoIzq.getY(),2)));
+        double b_2 = -(((double) Math.pow(puntoCentro.getX(),2)) + ((double)Math.pow(puntoCentro.getY(),2)));
+        double b_3 = -(((double) Math.pow(puntoDere.getX(),2)) + ((double)Math.pow(puntoDere.getY(),2)));
         double[][] array = {{puntoIzq.getX(),puntoIzq.getY(),1},{puntoCentro.getX(),puntoCentro.getY(),1},
                             {puntoDere.getX(),puntoDere.getY(),1}};
         Matrix A = new Matrix(array);
@@ -94,7 +94,6 @@ public class CircleEvent extends Event{
         ecuacion[2] = x.getArray()[0][0];
         ecuacion[3] = x.getArray()[1][0];
         ecuacion[4] = x.getArray()[2][0];
-
         return ecuacion;
     } 
     
