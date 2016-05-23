@@ -43,6 +43,8 @@ public class Punto {
         return (((Punto)obj).getX()==this.getX())&&(((Punto)obj).getY()==this.getY());
     }
     
-    
+    public String toString(){
+        return "("+this.getX()+","+this.getY()+")";
+    }
     
 }

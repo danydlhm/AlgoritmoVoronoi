@@ -5,6 +5,7 @@
  */
 package voronoi.tree;
 
+import java.util.Iterator;
 import voronoi.Punto;
 
 /**
@@ -32,17 +33,32 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
             }
             Punto a = pos.getElement().getIzquierdo();
             Position<Pareja> padre = this.parent(pos);
-            boolean esIzquierdo = this.left(padre)==pos;
-            Pareja nueva = new Pareja(p,a);
-            this.remove(pos);
-            if(esIzquierdo){
-                pos = this.insertLeft(padre, nueva);
+            boolean esIzquierdo;
+            if (!this.isRoot(pos)){
+                esIzquierdo = this.left(padre)==pos;
+                Pareja nueva = new Pareja(p,a);
+                this.remove(pos);
+                if(esIzquierdo){
+                    pos = this.insertLeft(padre, nueva);
+                }else{
+                    pos = this.insertRight(padre, nueva);
+                }
+                Position<Pareja> izqAux = this.insertLeft(pos, new Pareja(a,p));
+                this.insertLeft(izqAux, new Pareja(a));
+                this.insertRight(izqAux, new Pareja(p));
+                this.insertRight(pos, new Pareja(a));
+                referencia = pos;
             }else{
-                pos = this.insertRight(padre, nueva);
+                Punto p1 = pos.getElement().getIzquierdo();
+                Pareja nueva = new Pareja(p,p1);
+                this.remove(pos);
+                pos = this.addRoot(nueva);
+                Position<Pareja> posIzq = this.insertLeft(pos, new Pareja(p1,p));
+                this.insertLeft(posIzq, new Pareja(p1));
+                this.insertRight(posIzq,new Pareja(p));
+                this.insertRight(pos, new Pareja(p1));
+                referencia = pos;
             }
-            this.insertLeft(pos, new Pareja(nueva.getDerecho(),nueva.getIzquierdo()));
-            this.insertRight(pos, new Pareja(nueva.getDerecho()));
-            referencia = pos;
         }
         this.rebalance(this.root());
         return referencia;
@@ -58,8 +74,33 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         }
     }
     
+    private Position<Pareja> getPosition(Punto p){
+        Iterator<Position<Pareja>> iter = this.iterator();
+        while (iter.hasNext()){
+            Position<Pareja> pos = iter.next();
+            if (this.isLeaf(pos)){
+                Punto puntoAux = pos.getElement().getIzquierdo();
+                System.out.println(puntoAux.toString());
+                if (puntoAux.equals(p)){
+                    return pos;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private Punto remove(Punto p){
+        
+        Position<Pareja> pos = this.getPosition(p);
+        Position<Pareja> padre = this.parent(pos);
+        this.remove(pos);
+        
+        return null;
+        
+    }
     
     private void rebalance(Position<Pareja> zPos) {
+        System.out.println("Rebalanceando");
         if (this.isInternal(zPos)) {
             calculateHeight(zPos);
         }
@@ -194,4 +235,25 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         double punto2 = (Math.pow(site.getX()-b.getX(),2) + Math.pow(b.getY(),2)- Math.pow(site.getY(),2) )/(2*(b .getY()-site.getY()));
         return (punto1 < punto2);
     }
+    
+    @Override
+    public String toString(){
+        int nivel = 0;
+        int contador = 1;
+        String texto = "Árbol: \n";
+        Iterator<Position<Pareja>> iter = this.iterator();
+        while (iter.hasNext()){
+            texto += " - "+iter.next().getElement().toString();
+            if ((Math.pow(2,nivel) - contador) == 0){
+                texto += "\n";
+                contador = 1;
+                nivel += 1;
+            }else{
+                contador += 1;
+            }
+        }
+        return texto;
+        
+    }
+    
 }

@@ -29,6 +29,14 @@ public class Pareja {
         return derecho;
     }
     public boolean esPareja(){
-        return derecho==null;
+        return derecho!=null && izquierdo != null;
+    }
+    
+    public String toString(){
+        if (this.esPareja()){
+            return "["+this.getIzquierdo().toString()+" ; "+this.getDerecho().toString()+"]";
+        }else{
+            return "["+this.getIzquierdo().toString()+"]";
+        }
     }
 }
