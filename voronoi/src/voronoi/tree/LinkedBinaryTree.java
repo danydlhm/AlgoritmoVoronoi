@@ -102,9 +102,6 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
             IndexOutOfBoundsException {
         BTNode<E> node = checkPosition(p);
         Position<E> parentPos = node.getParent();
-        if (parentPos == null) {
-            throw new IndexOutOfBoundsException("No parent");
-        }
         return parentPos;
     }
 
