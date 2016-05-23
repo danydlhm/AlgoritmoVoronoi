@@ -5,7 +5,13 @@
  */
 package voronoi.tree;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Queue;
+import voronoi.CircleEvent;
+import voronoi.FortuneQueue;
 import voronoi.Punto;
 
 /**
@@ -13,7 +19,17 @@ import voronoi.Punto;
  * @author Andres
  */
 public class VoronoiTree extends LinkedBinaryTree<Pareja> {
-
+    
+    FortuneQueue colaEventos;
+    
+    public VoronoiTree(FortuneQueue colaEventosIn){
+        this.colaEventos = colaEventosIn;
+    }
+    
+    public VoronoiTree(){
+        //this(new FortuneQueue());
+    }
+    
     public Position<Pareja> insert(Punto p) {
         Position<Pareja> referencia;
         if (this.isEmpty()) {
@@ -61,6 +77,7 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
             }
         }
         this.rebalance(this.root());
+        this.detectCircleEvent();
         return referencia;
     }
     
@@ -254,6 +271,49 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         }
         return texto;
         
+    }
+    
+    public void detectCircleEvent(){
+        
+        Iterator<Position> iter = new FrontIterator(this);
+        ArrayDeque<Position> cola = new ArrayDeque<Position>();
+        String text = "";
+        while ( iter.hasNext()){
+            Position pAux = iter.next();
+            text += " - " +((Pareja) pAux.getElement()).getIzquierdo().toString();
+            if (cola.size() == 3){
+                Position[] arrAux = Arrays.copyOf(cola.toArray(),cola.size(),Position[].class);
+                Punto a1,a2,a0;
+                a0 = ((Position<Pareja>) arrAux[0]).getElement().getIzquierdo();
+                a1 = ((Position<Pareja>) arrAux[1]).getElement().getIzquierdo();
+                a2 = ((Position<Pareja>) arrAux[2]).getElement().getIzquierdo();
+                if (!(a0.equals(a1) || a1.equals(a2) || a0.equals(a2))){
+                    System.out.println("Son todos distintos:");
+                    System.out.println(a0 + " - "+ a1 + " - "+a2);
+                    CircleEvent nuevoEvento = new CircleEvent(a0,a1,a2,(Position<Pareja>) arrAux[1]);
+                    //this.colaEventos.add(nuevoEvento);
+                }
+                cola.pop();
+                cola.add(pAux);
+            }else{
+                cola.add(pAux);
+            }
+            
+        }
+        if (cola.size() == 3){
+                Position[] arrAux = Arrays.copyOf(cola.toArray(),cola.size(),Position[].class);
+                Punto a1,a2,a0;
+                a0 = ((Position<Pareja>) arrAux[0]).getElement().getIzquierdo();
+                a1 = ((Position<Pareja>) arrAux[1]).getElement().getIzquierdo();
+                a2 = ((Position<Pareja>) arrAux[2]).getElement().getIzquierdo();
+                if (!(a0.equals(a1) || a1.equals(a2) || a0.equals(a2))){
+                    System.out.println("Son todos distintos:");
+                    System.out.println(a0 + " - "+ a1 + " - "+a2);
+                    CircleEvent nuevoEvento = new CircleEvent(a0,a1,a2,(Position<Pareja>) arrAux[1]);
+                    //this.colaEventos.add(nuevoEvento);
+                }
+            }
+        System.out.println("Hojas: \n"+text);
     }
     
 }

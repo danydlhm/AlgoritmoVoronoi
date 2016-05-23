@@ -80,9 +80,6 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
             IndexOutOfBoundsException {
         BTNode<E> node = checkPosition(p);
         Position<E> leftPos = node.getLeft();
-        if (leftPos == null) {
-            throw new IndexOutOfBoundsException("No left child");
-        }
         return leftPos;
     }
 
@@ -91,9 +88,6 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
             IndexOutOfBoundsException {
         BTNode<E> node = checkPosition(p);
         Position<E> rightPos = node.getRight();
-        if (rightPos == null) {
-            throw new IndexOutOfBoundsException("No right child");
-        }
         return rightPos;
     }
 
