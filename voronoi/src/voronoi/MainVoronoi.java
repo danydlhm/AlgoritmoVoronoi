@@ -23,7 +23,7 @@ public class MainVoronoi {
         // Pero las aristas no termina de hacerlas bien  
         // Con tres funciona bien 
         Set<Punto> listapuntos = new HashSet <Punto>();
-        Punto p1 = new Punto(0,1);
+        Punto p1 = new Punto(0,1.5);
         Punto p2 = new Punto(2,0);
         Punto p3 = new Punto(-1,0);
 //        Punto p4 = new Punto(2,1);

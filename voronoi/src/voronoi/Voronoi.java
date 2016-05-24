@@ -83,7 +83,7 @@ public class Voronoi {
     */
     public void procesarSiteEvent(SiteEvent ev){
         
-        Punto cara = arbol.insert(ev.getP()).getElement().getDerecho();
+        Punto cara = arbol.insert(ev.getP()).getElement().getIzquierdo();
         Arista nuevArista = new Arista(null,null, ev.getP(), cara);
         
         estructuraSalida.addArista(nuevArista);
