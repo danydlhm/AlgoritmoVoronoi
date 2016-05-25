@@ -14,6 +14,8 @@ import voronoi.CircleEvent;
 import voronoi.Event;
 import voronoi.FortuneQueue;
 import voronoi.Punto;
+import interfazfortune.Parabola;
+import java.util.LinkedList;
 
 /**
  *
@@ -263,10 +265,13 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         }
     }
     
-    private boolean deterFrenteParabolas(Punto a, Punto b, Punto site) {    //a izquierdo, b derecho
-        double punto1 = (Math.pow(site.getX()-a.getX(),2) + Math.pow(a.getY(),2)- Math.pow(site.getY(),2) )/(2*(a.getY()-site.getY()));
-        double punto2 = (Math.pow(site.getX()-b.getX(),2) + Math.pow(b.getY(),2)- Math.pow(site.getY(),2) )/(2*(b .getY()-site.getY()));
-        return (punto1 < punto2);
+    private boolean deterFrenteParabolas(Punto a, Punto b, Punto site) {
+        //a izquierdo, b derecho
+        Parabola parabola1 = new Parabola((int)a.getX(),(int)a.getY(),(int) site.getY());
+        Parabola parabola2 = new Parabola((int)b.getX(),(int)b.getY(),(int) site.getY());
+        LinkedList<double[]> interseccion = parabola1.getInterseccion(parabola2);
+        double [] pInter = interseccion.get(0);
+        return (site.getX() < pInter[0] );
     }
     
     @Override
