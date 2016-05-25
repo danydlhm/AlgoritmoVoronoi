@@ -24,7 +24,7 @@ public class visualizarArbol extends javax.swing.JFrame {
         
         System.out.println("Visualizacion de árbol iniciada");
         initComponents();
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setTitle("Árbol de Parábolas");
 //        VoronoiTree arbolito = new VoronoiTree();
 //        voronoi.Punto nuevoPunto = new voronoi.Punto(3,4);

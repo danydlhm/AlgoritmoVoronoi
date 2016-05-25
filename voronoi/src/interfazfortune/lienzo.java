@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JPanel;
-import material.tree.Position;
+import voronoi.tree.Position;
 import voronoi.Punto;
 import voronoi.tree.FrontIterator;
 import voronoi.tree.Pareja;
@@ -53,7 +53,7 @@ public class lienzo extends JPanel{
 //            this.pintarParabolas(g2);
 //        }
         if (arbol.size()>0){
-            System.out.println("Dibujando frende de parabolas");
+            //System.out.println("Dibujando frende de parabolas");
             this.dibujarFrente(arbol, g2);
         }
         
@@ -170,5 +170,14 @@ public class lienzo extends JPanel{
         listaPar = new ArrayList();
         listaPuntos = new ArrayList();
         arbol = new VoronoiTree();
+    }
+    
+    public void recorrerFrenteDeParabolas(){
+        FrontIterator<Pareja> iter = new FrontIterator(arbol);
+        while (iter.hasNext()){
+            Pareja pos = iter.next().getElement();
+            System.out.println(pos.toString());
+        }
+        
     }
 }
