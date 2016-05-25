@@ -39,7 +39,7 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         } else {
             Position<Pareja> pos = this.root();
             boolean izquierda;
-            while (!this.isLeaf(pos)) {
+            while (pos != null || !this.isLeaf(pos)) {
                 Pareja actual = pos.getElement();
                 izquierda = this.deterFrenteParabolas(actual.getIzquierdo(), actual.getDerecho(), p);
                 if (izquierda) {
@@ -86,8 +86,17 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         if(this.isLeaf(p)){
             return 1;
         }else{
-            int alturaIzquierda = 1 + calculateHeight(this.left(p));
-            int alturaDerecha = 1 + calculateHeight(this.right(p));
+            
+            int alturaIzquierda = 1;
+            int alturaDerecha = 1;
+            
+            if (this.hasLeft(p)){
+                alturaIzquierda = 1 + calculateHeight(this.left(p));
+            }
+            
+            if(this.hasRight(p)){
+                alturaDerecha = 1 + calculateHeight(this.right(p));
+            }
             return Math.max(alturaDerecha, alturaIzquierda);
         }
     }
