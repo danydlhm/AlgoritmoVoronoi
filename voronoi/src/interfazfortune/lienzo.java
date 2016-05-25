@@ -30,6 +30,8 @@ public class lienzo extends JPanel{
     
     ArrayList<PuntoDibujo> listaPuntos = new ArrayList<PuntoDibujo>();
     ArrayList<Parabola> listaPar = new ArrayList<Parabola>();
+    ArrayList<PuntoDibujo> listaVertices = new ArrayList<PuntoDibujo>();
+    ArrayList<RectaDibujo> listaAristas = new ArrayList<RectaDibujo>();
     VoronoiTree arbol = new VoronoiTree();
     
     public void addPoint(int x,int y){
@@ -56,7 +58,12 @@ public class lienzo extends JPanel{
             //System.out.println("Dibujando frende de parabolas");
             this.dibujarFrente(arbol, g2);
         }
-        
+        if (this.listaVertices.size()>0){
+            g2.setColor(Color.RED);
+            for (PuntoDibujo punto : this.listaVertices){
+                punto.pintarPunto(g2);
+            }
+        }
     }
     
     public void procesarArbol(){
@@ -163,6 +170,19 @@ public class lienzo extends JPanel{
             });
             
         }
+        
+    }
+    
+    public void addVertice(PuntoDibujo p){
+        
+        this.listaVertices.add(p);
+        
+    }
+    
+    public void eliminarVerticesAristas(){
+        
+        this.listaVertices = new ArrayList<PuntoDibujo>();
+        this.listaAristas = new ArrayList<RectaDibujo>();
         
     }
     

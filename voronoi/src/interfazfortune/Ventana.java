@@ -10,11 +10,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import voronoi.Event;
-import voronoi.FortuneQueue;
-import voronoi.Punto;
-import voronoi.SiteEvent;
+import java.util.Set;
+import voronoi.*;
 import voronoi.tree.VoronoiTree;
 
 /**
@@ -125,6 +124,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         lienzo1 = new interfazfortune.lienzo();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -193,6 +193,13 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jLabel1))
         );
 
+        jButton4.setText("Ejecutar Fortune");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Archivo");
 
         jMenuItem1.setText("Abrir");
@@ -231,12 +238,14 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addGap(0, 333, Short.MAX_VALUE))
+                .addGap(0, 214, Short.MAX_VALUE))
             .addComponent(lienzo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -250,7 +259,8 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jButton6))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2)
+                        .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lienzo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -310,7 +320,30 @@ public class Ventana extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.siguienteEvent();
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
+    private void ejecucionDeVoronoi(){
+        // TODO add your handling code here:
+        ArrayList<PuntoDibujo> arrPuntos = lienzo1.getPuntos();
+        Set<Punto> listapuntos = new HashSet <Punto>();
+        for (PuntoDibujo p : arrPuntos){
+            Punto paux = new Punto(p.getX(),p.getY());
+            System.out.println("Añadido punto: "+paux);
+            listapuntos.add(paux);
+        }
+        
+        Voronoi v = new Voronoi();
+        DCEL salida = new DCEL();
+        
+        System.out.println("Obtenida la salida del Voronoi");
+        salida = v.Voronoi(listapuntos);
+        System.out.println(salida.toString());
+        for (Vertice vert : salida.getListaVertices()){
+            PuntoDibujo pAux = new PuntoDibujo((int)vert.getX(),(int)vert.getY());
+            lienzo1.addVertice(pAux);
+        }
+        lienzo1.repaint();
+    }
+    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -319,6 +352,10 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         eliminarTodo();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.ejecucionDeVoronoi();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,6 +401,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

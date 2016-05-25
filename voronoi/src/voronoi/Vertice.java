@@ -34,4 +34,8 @@ public class Vertice extends Punto  {
         this.aristaIncidente = aristaIncidente;
     }
     
+    
+    public String toString(){
+        return "Vertice: "+super.toString();
+    }
 }

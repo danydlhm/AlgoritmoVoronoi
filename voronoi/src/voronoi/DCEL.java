@@ -75,4 +75,18 @@ public class DCEL {
         return listaAristas;
     }
     
+    public String toString(){
+        String texto = "";
+        texto+="\nAristas: ";
+        for (Arista a : this.listaAristas){
+            texto+= a.toString();
+        }
+        texto+="\nVertices: ";
+        for (Vertice v : this.listaVertices){
+            texto+= v.toString();
+        }
+        
+        return texto;
+    }
+    
 }

@@ -71,5 +71,12 @@ class Arista {
               
     }
     
+    
+    public String toString(){
+        return "\nArista\nNacimiento: "+(this.pNacimiento==null?"":this.pNacimiento.toString())+
+                " Fin: "+(this.pFin==null?"":this.pFin.toString())+
+                "\nCara1: "+(this.cara1==null?"":this.cara1.toString())+
+                " Cara2: "+(this.cara2==null?"":this.cara2.toString());
+    }
         
 }
