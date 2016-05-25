@@ -91,20 +91,13 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
     }
     
     private int calculateHeight(Position<Pareja> p) {
-        if(this.isLeaf(p)){
+        if (p==null){
+            return 0;
+        }else if(this.isLeaf(p)){
             return 1;
         }else{
-            
-            int alturaIzquierda = 1;
-            int alturaDerecha = 1;
-            
-            if (this.hasLeft(p)){
-                alturaIzquierda = 1 + calculateHeight(this.left(p));
-            }
-            
-            if(this.hasRight(p)){
-                alturaDerecha = 1 + calculateHeight(this.right(p));
-            }
+            int alturaIzquierda = 1 + calculateHeight(this.left(p));
+            int alturaDerecha = 1 + calculateHeight(this.right(p));
             return Math.max(alturaDerecha, alturaIzquierda);
         }
     }
@@ -133,6 +126,13 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         return null;
         
     }
+//    
+//    @Override
+//    public Pareja remove(Position<Pareja> p){
+//        Position<Pareja> pos;
+//        
+//        return pos.getElement();
+//    }
     
     private void rebalance(Position<Pareja> zPos) {
         System.out.println("Rebalanceando");

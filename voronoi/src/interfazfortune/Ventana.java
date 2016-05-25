@@ -337,9 +337,28 @@ public class Ventana extends javax.swing.JFrame {
         System.out.println("Obtenida la salida del Voronoi");
         salida = v.Voronoi(listapuntos);
         System.out.println(salida.toString());
+        lienzo1.eliminarVerticesAristas();
         for (Vertice vert : salida.getListaVertices()){
             PuntoDibujo pAux = new PuntoDibujo((int)vert.getX(),(int)vert.getY());
             lienzo1.addVertice(pAux);
+        }
+        ArrayList<Arista> arr = salida.getListaAristas();
+        RectaDibujo r;
+        for (Arista a : arr){
+            PuntoDibujo ini;
+            PuntoDibujo fin;
+            if (a.getpFin()!= null){
+                fin = new PuntoDibujo((int) a.getpFin().getX(),(int) a.getpFin().getY());
+            }else{
+                fin = null;
+            }
+            if (a.getpNacimiento()!=null){
+                ini = new PuntoDibujo((int) a.getpNacimiento().getX(),(int) a.getpNacimiento().getY());
+            }else{
+                ini = null;
+            }
+            r = new RectaDibujo(ini,fin);
+            lienzo1.addArista(r);
         }
         lienzo1.repaint();
     }

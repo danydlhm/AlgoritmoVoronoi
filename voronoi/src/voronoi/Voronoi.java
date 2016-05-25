@@ -97,7 +97,8 @@ public class Voronoi {
         Punto vertice = ev.getCentro();
         Punto cara = ev.getPuntoCentro();
         Position<Pareja> pos = ev.getPosition();
-        arbol.remove(pos);
+        //arbol.remove(pos);
+        System.out.println("Creada arista con vértice de punto de nacimiento: "+vertice.toString());
         Arista nuevArista = new Arista(vertice,null,ev.getPuntoIzq(),ev.getPuntoDere());
         estructuraSalida.updateAristas(vertice,cara);
         estructuraSalida.addArista(nuevArista);

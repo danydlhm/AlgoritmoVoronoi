@@ -64,6 +64,12 @@ public class lienzo extends JPanel{
                 punto.pintarPunto(g2);
             }
         }
+        if (this.listaAristas.size()>0){
+            g2.setColor(Color.MAGENTA);
+            for (RectaDibujo a : this.listaAristas){
+                a.pintar(g2);
+            }
+        }
     }
     
     public void procesarArbol(){
@@ -179,6 +185,12 @@ public class lienzo extends JPanel{
         
     }
     
+    public void addArista(RectaDibujo r){
+        
+        this.listaAristas.add(r);
+        
+    }
+    
     public void eliminarVerticesAristas(){
         
         this.listaVertices = new ArrayList<PuntoDibujo>();
@@ -190,6 +202,7 @@ public class lienzo extends JPanel{
         listaPar = new ArrayList();
         listaPuntos = new ArrayList();
         arbol = new VoronoiTree();
+        this.eliminarVerticesAristas();
     }
     
     public void recorrerFrenteDeParabolas(){

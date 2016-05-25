@@ -9,7 +9,7 @@ package voronoi;
  *
  * @author JosePertierra
  */
-class Arista {
+public class Arista {
     
     
     Punto pNacimiento;
@@ -78,5 +78,4 @@ class Arista {
                 "\nCara1: "+(this.cara1==null?"":this.cara1.toString())+
                 " Cara2: "+(this.cara2==null?"":this.cara2.toString());
     }
-        
 }

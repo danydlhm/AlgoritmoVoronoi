@@ -23,11 +23,10 @@ public class MainVoronoi {
         // Pero las aristas no termina de hacerlas bien  
         // Con tres funciona bien 
         Set<Punto> listapuntos = new HashSet <Punto>();
-        Punto p1 = new Punto(0,1.5);
-        Punto p2 = new Punto(2,0);
-        Punto p3 = new Punto(-1,0);
+        Punto p1 = new Punto(124.0,387.0);
+        Punto p2 = new Punto(286.0,325.0);
+        Punto p3 = new Punto(443.0,263.0);
 //        Punto p4 = new Punto(2,1);
-        Punto p5 = new Punto(-1,3);
         Voronoi v = new Voronoi();
         DCEL salida = new DCEL();
         
@@ -35,7 +34,7 @@ public class MainVoronoi {
         listapuntos.add(p2);
         listapuntos.add(p3);
 //        listapuntos.add(p4);
-        listapuntos.add(p5);
+
         
         salida = v.Voronoi(listapuntos);
         System.out.println("--- Salida ---");
