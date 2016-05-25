@@ -39,12 +39,18 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         } else {
             Position<Pareja> pos = this.root();
             boolean izquierda;
-            while (pos != null || !this.isLeaf(pos)) {
+            while (!this.isLeaf(pos)) {
                 Pareja actual = pos.getElement();
                 izquierda = this.deterFrenteParabolas(actual.getIzquierdo(), actual.getDerecho(), p);
                 if (izquierda) {
+                    if(!this.hasLeft(pos)){
+                        System.out.println("Soy el hijo descolago no tengo izq"+pos.getElement());
+                    }
                     pos = this.left(pos);
                 } else {
+                    if(!this.hasRight(pos)){
+                        System.out.println("Soy el hijo descolago no tengo der"+pos.getElement());
+                    }
                     pos = this.right(pos);
                 }
             }
