@@ -270,7 +270,12 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
         Parabola parabola1 = new Parabola((int)a.getX(),(int)a.getY(),(int) site.getY());
         Parabola parabola2 = new Parabola((int)b.getX(),(int)b.getY(),(int) site.getY());
         LinkedList<double[]> interseccion = parabola1.getInterseccion(parabola2);
-        double [] pInter = interseccion.get(0);
+        double [] pInter;
+        if (a.getX() < b.getX()){
+        pInter = interseccion.get(0);
+        }else{
+            pInter = interseccion.get(1);
+        }
         return (site.getX() < pInter[0] );
     }
     
