@@ -86,7 +86,7 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
                 referencia = pos;
             }
         }
-        //this.rebalance(this.root());
+        this.rebalance(this.root());
         this.detectCircleEvent();
         return referencia;
     }
@@ -120,24 +120,13 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
 
     public Pareja removeHijo(Position<Pareja> p) throws IllegalStateException {
         Position<Pareja> parent = this.parent(p);
-        Position<Pareja> sib = (this.left(parent) == p)? this.right(parent) : this.left(parent);
-        Position<Pareja> grand = this.parent(this.parent(parent));
-        boolean esIzquierdo = (this.left(grand) == parent);
         Pareja removed = this.remove(p);
         this.remove(parent);
-        Position<Pareja> aux = sib;
-        while (!this.isLeaf(aux)){
-            if(esIzquierdo){
-                aux = this.right(aux);
-            }else{
-                aux = this.left(aux);
-            }
-        }
-        if(esIzquierdo){
-            grand.getElement().setIzquierdo(aux.getElement().getIzquierdo());
-        }else{
-            grand.getElement().setDerecho(aux.getElement().getIzquierdo());
-        }
+        
+        this.reconstruirParejas(this.root());
+        this.rebalance(this.root());
+        this.detectCircleEvent();
+        
         return removed;
     }
     
@@ -373,16 +362,14 @@ public class VoronoiTree extends LinkedBinaryTree<Pareja> {
             });  
         }  
     }
+
+    
     public void reconstruirParejas(Position<Pareja> p){
         if(!this.isLeaf(p)){
            this.reconstruirParejas(this.left(p));
            this.reconstruirParejas(this.right(p));
-           Position<Pareja> izq = this.left(p); 
-           Position<Pareja> der = this.right(p);
-           Punto izqPunt = this.getLeftLeaf(der);
-           Punto derPunt = this.getRightLeaf(izq);
-           Position<Pareja> parent = this.parent(p);
-           
+           p.getElement().setIzquierdo(getRightLeaf(this.left(p)));
+           p.getElement().setDerecho(getLeftLeaf(this.right(p)));        
         }
     }
     
